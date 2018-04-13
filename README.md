@@ -6,7 +6,7 @@
 
 Demo圖片：
 個人頁面（可查看貼文、已排商品）
-![Optional Text](../master/Database-final/demo/個人頁面.png)
+![Optional Text](./demo/個人頁面.png)
 動態（可查看賣家貼文）
 
 貼文頁面
