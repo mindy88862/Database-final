@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>出清台大2.0</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">      
+	<link href="css/main.css" rel="stylesheet">
+	 <link href="css/responsive.css" rel="stylesheet">
+	 <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    
+  </head>
+  <body class="homepage">   
+	<header id="header">
+        <nav class="navbar navbar-fixed-top" role="banner">
+             <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button> <!-- 不一定用得到 -->
+                    <a class="navbar-brand" href="index.html">出清台大</a>
+                </div>
+                
+                <div class="collapse navbar-collapse navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li><a href="index.html">主頁</a></li>
+                        <li><a href="post.html">發文</a></li>
+                        <li><a href="portfolio.html">動態</a></li>
+                        <li><a href="login.html">登入/註冊</a></li>                    
+                    </ul>
+                </div>
+            </div><!--/.container-->
+        </nav><!--/nav-->
+		
+    </header><!--/header-->
+
+    <section id="manage-title">
+      <div class="container manage-header">
+        <h2>貼文標題</h2>
+        <div class="button-set">
+          <button type="button" class="btn btn-primary btn-lg" id="end-trans">結單</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="manage-choose">
+      <div class="container" id="manage-line">
+        <div class="about-header">
+            <h2 class="mytitle">正在排此商品</h2>
+            <h6 class="mysubtitle">查看有哪些人在排你的商品</h6>
+                <!--   <a href="#" class="view-bottom">檢視所有 >></a>-->
+        </div>
+        <div id="about-content">
+            <table class="transtable">
+              <colgroup span="7"></colgroup>
+                <thead id="table-head">
+                  <tr class="table-row">
+                    <th>商品</th>
+                    <th>買家</th>
+                    <th>數量</th>
+                    <th>可否配合時間</th>
+                    <th>可否配合地點</th>
+                    <th>下單時間</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="table-body">
+                        <?php //列出在排商品
+                            while ($interest = mysqli_fetch_row($interest_sql)) {
+                                $post_sql = mysqli_query($db, "SELECT * FROM Post where PID='$interest[1]'");
+                                $item_sql = mysqli_query($db, "SELECT * FROM Item where PID='$interest[1]' AND IID='$interest[2]'");
+                                $post = mysqli_fetch_row($post_sql);
+                                $item = mysqli_fetch_row($item_sql);
+                                echo '<tr>','<td>', $item[2], '</td>'; //物品名稱
+                                echo '<td>', $item[3], '</td>'; //價格
+                                echo '<td>', $post[4], '</td>'; //時間
+                                echo '<td>', $post[5], '</td>'; //地點
+                                echo '<td>', $interest[4], '</td>'; //數量
+                                echo '<td>';
+                                echo '<td><a href="member_post.php?postid=',$interest[1],'"target="_blank" class="change-bottom">確認面交</a></td>';
+                                echo '</tr>';
+                            }
+                        ?>
+                        <?php //列出在排商品
+                            while ($interest = mysqli_fetch_row($interest_sql)) {
+                                $post_sql = mysqli_query($db, "SELECT * FROM Post where PID='$interest[1]'");
+                                $item_sql = mysqli_query($db, "SELECT * FROM Item where PID='$interest[1]' AND IID='$interest[2]'");
+                                $post = mysqli_fetch_row($post_sql);
+                                $item = mysqli_fetch_row($item_sql);
+                                echo '<tr>','<td>', $item[2], '</td>'; //物品名稱
+                                echo '<td>', $item[3], '</td>'; //價格
+                                echo '<td>', $post[4], '</td>'; //時間
+                                echo '<td>', $post[5], '</td>'; //地點
+                                echo '<td>', $interest[4], '</td>'; //數量
+                                echo '<td>';
+                                echo '<td><a href="member_post.php?postid=',$interest[1],'"target="_blank" class="change-bottom">確認面交</a></td>';
+                                echo '</tr>';
+                            }
+                        ?>                        
+                </tbody>
+            </table>
+        </div>
+
+      </div>
+    </section>
+    <section id="manage-pai">
+        <div class="container">
+            <div class="about-header">
+                    <h2 class="mytitle">近期面交</h2>
+                    <h6 class="mysubtitle">查看最近有哪些面交</h6>
+                <!--   <a href="#" class="view-bottom">檢視所有 >></a>-->
+                </div>
+                <div id="about-content">
+                    <table class="transtable">
+                        <colgroup span="7"></colgroup>
+                        <thead id="table-head">
+                            <tr class="table-row">
+                                <th>商品</th>
+                                <th>價格</th>
+                                <th>約定時間</th>
+                                <th>約定地點</th>
+                                <th>數量</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                        <?php //列出在排商品
+                            while ($interest = mysqli_fetch_row($interest_sql)) {
+                                $post_sql = mysqli_query($db, "SELECT * FROM Post where PID='$interest[1]'");
+                                $item_sql = mysqli_query($db, "SELECT * FROM Item where PID='$interest[1]' AND IID='$interest[2]'");
+                                $post = mysqli_fetch_row($post_sql);
+                                $item = mysqli_fetch_row($item_sql);
+                                echo '<tr>','<td>', $item[2], '</td>'; //物品名稱
+                                echo '<td>', $item[3], '</td>'; //價格
+                                echo '<td>', $post[4], '</td>'; //時間
+                                echo '<td>', $post[5], '</td>'; //地點
+                                echo '<td>', $interest[4], '</td>'; //數量
+                                echo '<td><a href="member_post.php?postid=',$interest[1],'"target="_blank" class="change-bottom">商品連結</a></td>';
+                                echo '<td><a href="member_post.php?postid=',$interest[1],'"target="_blank" class="change-bottom">面交完成</a></td>';
+                                echo '</tr>';
+                            }
+                        ?>
+                        </tbody>
+                    </table>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer" class="midnight-blue">
+        <div class="container">
+            <div class="col-sm-6">
+                    &copy; DataBaseProject Team 3.
+            </div>
+        </div>
+    </footer><!--/#footer-->
+    
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>   
+    <script src="js/wow.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
