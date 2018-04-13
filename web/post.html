@@ -1,0 +1,129 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>出清台大2.0</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet"><!-- 沒用 -->
+	<link rel="stylesheet" href="css/font-awesome.min.css"><!-- 沒用 -->
+	<link href="css/animate.min.css" rel="stylesheet"><!-- 動畫-->
+    <link href="css/prettyPhoto.css" rel="stylesheet"><!-- 沒用-->
+	<link href="css/main.css" rel="stylesheet">
+	<!-- <link href="css/responsive.css" rel="stylesheet"> -->
+	 <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    
+</head>
+  <body class="homepage">   
+	<header id="header">
+        <nav class="navbar navbar-fixed-top" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button> <!-- 不一定用得到 -->
+                    <a class="navbar-brand" href="index.html">出清台大</a>
+                </div>
+                <div class="collapse navbar-collapse navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li><a href="index.php">主頁</a></li>
+                        <li class="active"><a href="post.html">發文</a></li>
+                        <li><a href="portfolio.php">動態</a></li>
+                        <li><a href="logout.php">登出</a></li>                
+                    </ul>
+                </div>
+            </div><!--/.container-->
+        </nav><!--/nav-->
+	</header><!--/header-->
+
+    <section id="post.page">
+        <div class="container">
+            <div class="center" id="post-special">        
+                <h2>發布出清貼文</h2>
+            </div>
+            <div> 
+                <form enctype="multipart/form-data" action="post_fin.php" method="post">
+                    <div class="col-sm-5 col-sm-offset-1" id="post-area">
+                        <div class="left-hand">
+                            <div class="form-group">
+                                <label>貼文標題 *</label>
+                                <input type="text" name="post_name" class="form-control" required="required">
+                            </div>
+                            <div class="form-group">
+                                <label>貼文類別</label>
+                                <select name="category">
+                                    <option value="0" selected="selected">出清</option>
+                                    <option value="1">贈送</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>面交時間 *</label>
+                                <input type="text" id="time" name="time" class="form-control" required="required"></input>
+                                <button type="button" id="time_button" class="post-button"> 買賣雙方自議 </button>
+                            </div>
+                            <div class="form-group">
+                                <label>面交地點 *</label>          
+                                <input type="text" id="place" name="place" class="form-control" required="required"></input>
+                                <button type="button" id="place_button" class="post-button"> 買賣雙方自議 </button>
+                            </div>
+                            <div class="form-group submit-button" id="button-area">
+                                <button type="button" name="add" class="btn btn-primary btn-lg" id="add">新增物品</button>
+                                <button type="submit" name="submit" class="btn btn-primary btn-lg" required="required">提交</button>
+                            </div>     
+                        </div>
+                        <div class="right-hand">
+                            <div class="form-group">
+                                <label>物品</label>
+                                <br/>物品名稱*：<input type="text" name="item_name[]" class="form-control" required="required"></input>
+                                物品價格*：<input type="number" name="item_price[]" class="form-control" min="0" required="required"></input>
+                                物品數量*：<input type="number" name="item_qua[]" class="form-control" required="required" value="1" min="1"></input>
+                                物品描述：<input type="text" name="item_des[]" class="form-control"></input>
+                                圖片上傳：<input type="file" name="img[]" accept=".jpg"></input>
+                            </div>
+                        </div>        
+                    </div>
+                    <input type="hidden" name="item_num" id="item_num" value="1"></input>
+                </form> 
+            </div>
+
+        </div><!--/.container-->
+    </section>
+
+
+
+    <footer id="footer" class="midnight-blue">
+        <div class="container">
+            <div class="col-sm-6">
+                    &copy; DataBaseProject Team 3.
+            </div>
+        </div>
+    </footer><!--/#footer-->
+    
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/jquery.isotope.min.js"></script>   
+    <script src="js/wow.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+<script>
+    $('#add').on('click',function(){
+        var item = '<div class="form-group"><label>物品</label><br/>物品名稱*：<input type="text" name="item_name[]" class="form-control" required="required"></input>物品價格*：<input type="number" name="item_price[]" class="form-control" required="required"></input>物品數量*：<input type="number" name="item_qua[]" class="form-control" required="required" value="1"></input>物品描述：<input type="text" name="item_des[]" class="form-control"></input>圖片上傳：<input type="file" name="img[]" accept=".jpg"></input></div>';
+        $('.right-hand').append(item);
+        document.getElementById('item_num').value = parseInt(document.getElementById('item_num').value) + 1 //物品個數
+        console.log(document.getElementById('item_num'));
+    });
+    $('#time_button').on('click',function(){
+        document.getElementById('time').value = "自議";
+    });
+    $('#place_button').on('click',function(){
+        document.getElementById('place').value = "自議";
+    });    
+</script>
